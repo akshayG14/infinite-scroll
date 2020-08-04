@@ -21,20 +21,23 @@ async function getPhotos() {
   }
 }
 
+// helper function to set attributes on DOM elements
+function setAttributes(ele, attr) {
+  for (const key in attr) {
+    ele.setAttribute(key, attr[key]);
+  }
+}
+
 // create elements for links and photos... Adding it to DOM
 function displayPhotos() {
   // iterate through each photo object
   photosArray.forEach((photo) => {
     // creating <a> to link to unsplash
     const item = document.createElement("a");
-    item.setAttribute("href", photo.links.html);
-    item.setAttribute("target", "_blank");
+    setAttributes(item, { href: photo.links.html, target: "_blank" });
     // create image for a photo
     const image = document.createElement("img");
-    image.setAttribute("src", photo.urls.regular);
-    image.setAttribute("alt", photo.alt_description);
-    image.setAttribute("title", photo.alt_description);
-    // place img within anchor element... as a whole will be placed within image-container
+    setAttributes(image, { src: photo.urls.regular, alt: photo.alt_description, title: photo.alt_description });
     item.appendChild(image);
     imageContainer.appendChild(item);
   });
